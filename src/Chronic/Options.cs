@@ -5,6 +5,8 @@ namespace Chronic
 {
     public class Options
     {
+   
+
         public static readonly int DefaultAmbiguousTimeRange = 6;
 
         public Func<DateTime> Clock { get; set; }
