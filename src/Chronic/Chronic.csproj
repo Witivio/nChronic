@@ -5,6 +5,7 @@
     <Company>Witivio</Company>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Witivio.Chronic</PackageId>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
