@@ -23,7 +23,7 @@ namespace Chronic
         {
             new FrenchRepeaterScanner(),
             new FrenchGrabberScanner(),
-            new PointerScanner(),
+            new FrenchPointerScanner(),
             new FrenchScalarScanner(),
             new OrdinalScanner(),
             new FrenchSeparatorScanner(),
@@ -60,7 +60,7 @@ namespace Chronic
 
             var taggedTokens = tokens.Where(token => token.HasTags()).ToList();
             Logger.Log(() => String.Join(",", taggedTokens.Select(t => t.ToString())));
-
+             
             return taggedTokens;
         }
 
@@ -104,21 +104,21 @@ namespace Chronic
                 .Numerize()
                 .ReplaceAll(@" \-(\d{4})\b", " tzminus$1")
                 .ReplaceAll(@"(?:^|\s)0(\d+:\d+\s*pm?\b)", "$1")
-                .ReplaceAll(@"\baujourd\b", "aujourdhui")
-                .ReplaceAll(@"\bdemain\b", "demain")
-                .ReplaceAll(@"\bhier\b", "hier")
+                .ReplaceAll(@"\baujourd\b", "ce jour")
+                .ReplaceAll(@"\bdemain\b", "suivant jour")
+                .ReplaceAll(@"\bhier\b", "precedent jour")
                 .ReplaceAll(@"\bmidi\b", "12:00")
                 .ReplaceAll(@"\bminuit\b", "24:00")
                 .ReplaceAll(@"\bavant\b", "avant")
                 .ReplaceAll(@"\bmaintenant\b", "cette seconde")
                 .ReplaceAll(@"\b(avant)\b", "avant")
-                .ReplaceAll(@"\bthis past\b", "last")
-                .ReplaceAll(@"\bthis last\b", "last")
+                .ReplaceAll(@"\bthis past\b", "avant")
+                .ReplaceAll(@"\bce dernier\b", "avant")
                 .ReplaceAll(@"\b(?:in|during) the (morning)\b", "$1")
                 .ReplaceAll(@"\b(?:in the|during the|at) (apres midi|hier|nuit)\b", "$1")
                 .ReplaceAll(@"\bcette nuit\b", "cette nuit")
                 //.ReplaceAll(@"(\d)([ap]m|oclock)\b", "$1 $2")
-                //.ReplaceAll(@"\b(hence|after|from)\b", "future")
+                .ReplaceAll(@"\b(dans|ici|from)\b", "future")
                 ;
 
             return normalized;

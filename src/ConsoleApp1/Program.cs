@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ConsoleApp1
@@ -13,13 +14,15 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            //var parser = new Chronic.Parser();
+            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("fr");
 
-            //Span parsedObj = parser.Parse("je suis nee le 25/10/2015", new Options { Language = "fr" });
+           var parser = new Chronic.Parser();
 
-            //DateTime? parsedDateTime = parsedObj.Start;
+            Span parsedObj = parser.Parse("dans 1h");
 
-            DoParser();
+            DateTime? parsedDateTime = parsedObj.Start;
+
+
             Console.ReadLine();
 
         }

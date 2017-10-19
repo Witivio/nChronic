@@ -33,9 +33,10 @@ namespace Chronic
     {
         static readonly dynamic[] _matches = new dynamic[]
             {
-                new { Pattern = "precendent", Tag = new Grabber(Grabber.Type.Last) },
+                new { Pattern = "precedent", Tag = new Grabber(Grabber.Type.Last) },
                 new { Pattern = "suivant", Tag = new Grabber(Grabber.Type.Next) },
-                new { Pattern = "ce", Tag = new Grabber(Grabber.Type.This) }
+                new { Pattern = "ce", Tag = new Grabber(Grabber.Type.This) },
+                new { Pattern = "cette", Tag = new Grabber(Grabber.Type.This) }
             };
 
         public IList<Token> Scan(IList<Token> tokens, Options options)
