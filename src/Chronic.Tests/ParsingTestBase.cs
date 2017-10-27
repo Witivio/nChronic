@@ -1,6 +1,7 @@
 using System;
 using System.Globalization;
 using System.Linq;
+using System.Threading;
 
 namespace Chronic.Tests
 {
@@ -8,8 +9,14 @@ namespace Chronic.Tests
     {
         protected abstract DateTime Now();
 
-        protected Span Parse(string input)
+        protected void SetThreadCulture(string culture)
         {
+            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(culture);
+        }
+
+        protected Span Parse(string input, string culture = "en")
+        {
+            SetThreadCulture(culture);
             Parser.IsDebugMode = true;
             var parser = new Parser(new Options
             {
@@ -18,8 +25,9 @@ namespace Chronic.Tests
             return parser.Parse(input);
         }
 
-        protected Span Parse(string input, dynamic options)
+        protected Span Parse(string input, dynamic options, string culture = "en")
         {
+            SetThreadCulture(culture);
             Parser.IsDebugMode = true;
             var aggregatedOptions = TestingExtensions
                 .Extend(new Options() { Clock = Now }, options);

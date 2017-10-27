@@ -7,6 +7,11 @@ namespace Chronic.Tests.Handlers
 {
     public class GRGRHandler_correctly_parses : ParsingTestsBase
     {
+        public GRGRHandler_correctly_parses()
+        {
+            SetThreadCulture("en");
+        }
+
         protected override DateTime Now()
         {
             return Time.New(2006, 8, 16, 14, 0, 0);

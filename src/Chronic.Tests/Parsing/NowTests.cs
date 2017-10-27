@@ -20,6 +20,7 @@ namespace Chronic.Tests.Parsing
         [Fact]
         public void repeated_parsing_yields_different_values()
         {
+            SetThreadCulture("en");
             var parser = new Parser();
             var result1 = parser.Parse("now");
             Thread.Sleep(100);
