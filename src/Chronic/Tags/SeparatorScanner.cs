@@ -42,6 +42,8 @@ namespace Chronic
                 new { Pattern = @"^et$".Compile(), Tag = new SeparatorComma() },
                 new { Pattern = @"^(a|@)$".Compile(), Tag = new SeparatorAt() },
                 new { Pattern = @"^dans$".Compile(), Tag = new SeparatorIn() },
+                new { Pattern = @"^de$".Compile(), Tag = new SeparatorIn() },
+                new { Pattern = @"^en$".Compile(), Tag = new SeparatorIn() },
                 new { Pattern = @"^/$".Compile(), Tag = new SeparatorDate(Separator.Type.Slash) },
                 new { Pattern = @"^-$".Compile(), Tag = new SeparatorDate(Separator.Type.Dash) },
                 new { Pattern = @"^sur$".Compile(), Tag = new SeparatorOn() },

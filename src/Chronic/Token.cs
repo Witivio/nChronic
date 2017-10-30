@@ -61,7 +61,8 @@ namespace Chronic
 
         internal bool IsTaggedAs(Type type)
         {
-            return _tags.Any(tag => type.IsAssignableFrom(tag.GetType()));
+            var res = _tags.Any(tag => type.IsAssignableFrom(tag.GetType()));
+            return res;
         }
 
         public override string ToString()

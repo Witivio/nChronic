@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
 using Chronic.Tags.Repeaters;
 
 namespace Chronic.Tags.Repeaters
@@ -124,7 +125,7 @@ namespace Chronic.Tags.Repeaters
         }
 
         static readonly Regex _timePattern =
-            @"^\d{1,2}(:?\d{2})?([\.:]?\d{2})?$".Compile();
+            @"^\d{1,2}(:?\d{2})?([\.:h]?\d{2})?$".Compile();
 
         static readonly List<dynamic> DayPortionPatterns = new List<dynamic>
             {
@@ -269,6 +270,20 @@ namespace Chronic.Tags.Repeaters
             return tag;
         }
 
+        static ITag ScanDayPortionsFrench(Token token, Options options)
+        {
+            ITag tag = null;
+
+            _timeSepratorFrench.ForEach(item =>
+            {
+                
+            });
+
+
+            return tag;
+        }
+
+
         static ITag ScanDayNames(Token token, Options options)
         {
             ITag tag = null;
@@ -303,7 +318,7 @@ namespace Chronic.Tags.Repeaters
         }
 
         static readonly Regex _timePattern =
-            @"^\d{1,2}(:?\d{2})?([\.:]?\d{2})?$".Compile();
+            @"^\d{1,2}(:?\d{2})?([\.:h]?\d{2})?$".Compile();
 
         static readonly List<dynamic> DayPortionPatterns = new List<dynamic>
             {
@@ -315,18 +330,27 @@ namespace Chronic.Tags.Repeaters
                 new {Pattern = "^(nuit|nite)s?$".Compile(), Portion = DayPortion.NIGHT},
             };
 
+        private static readonly char[] _timeSepratorFrench = new[]
+        {
+            ':',
+            'h',
+        };
+
         static readonly List<dynamic> DayPatterns = new List<dynamic>
             {
-                new {Pattern ="^lun(di)?$".Compile(), Day = DayOfWeek.Monday},
-                new {Pattern = "^t(ue|eu|oo|u|)s(day)?$".Compile(), Day = DayOfWeek.Tuesday},
+                new {Pattern ="^lundi$".Compile(), Day = DayOfWeek.Monday},
+                new {Pattern = "^mardi$".Compile(), Day = DayOfWeek.Tuesday},
                 new {Pattern = "^mar$".Compile(), Day = DayOfWeek.Tuesday},
                 new {Pattern = "^mercredi$".Compile(), Day = DayOfWeek.Wednesday},
                 new {Pattern = "^mer$".Compile(), Day = DayOfWeek.Wednesday},
-                new {Pattern = "^je(u|eu)di$".Compile(), Day = DayOfWeek.Thursday},
+                new {Pattern = "^jeudi$".Compile(), Day = DayOfWeek.Thursday},
                 new {Pattern = "^jeu$".Compile(), Day = DayOfWeek.Thursday},
-                new {Pattern = "^ven[iy](di)?$".Compile(), Day = DayOfWeek.Friday},
-                new {Pattern = "^sam(t?[e]die)?$".Compile(), Day = DayOfWeek.Saturday},
-                new {Pattern = "^di[nm](che)?$".Compile(), Day = DayOfWeek.Sunday},
+                new {Pattern = "^vendredi$".Compile(), Day = DayOfWeek.Friday},
+                new {Pattern = "^ven$".Compile(), Day = DayOfWeek.Friday},
+                new {Pattern = "^samedi$".Compile(), Day = DayOfWeek.Saturday},
+                new {Pattern = "^sam$".Compile(), Day = DayOfWeek.Saturday},
+                new {Pattern = "^dimanche$".Compile(), Day = DayOfWeek.Sunday},
+                new {Pattern = "^dim$".Compile(), Day = DayOfWeek.Sunday},
             };
 
         static readonly List<dynamic> MonthPatterns = new List<dynamic>
@@ -352,16 +376,21 @@ namespace Chronic.Tags.Repeaters
         static readonly List<dynamic> UnitPatterns = new List<dynamic>
             {
                 new { Pattern = "^annees?$".Compile(), Unit = typeof(RepeaterYear) },
+                new { Pattern = "^lannee?$".Compile(), Unit = typeof(RepeaterYear) },
+                new { Pattern = "^ans?$".Compile(), Unit = typeof(RepeaterYear) },
                 new { Pattern = "^seasons?$".Compile(), Unit = typeof(RepeaterSeason) },
                 new { Pattern = "^mois?$".Compile(), Unit = typeof(RepeaterMonth) },
                 new { Pattern = "^fortnights?$".Compile(), Unit = typeof(RepeaterFortnight) },
                 new { Pattern = "^semaines?$".Compile(), Unit = typeof(RepeaterWeek) },
                 new { Pattern = "^weekends?$".Compile(), Unit = typeof(RepeaterWeekend) },
+                new { Pattern = "^jour?$".Compile(), Unit = typeof(RepeaterDay) },
                 new { Pattern = "^jours?$".Compile(), Unit = typeof(RepeaterDay) },
-                new { Pattern = "^jrs?$".Compile(), Unit = typeof(RepeaterDay) },
+                new { Pattern = "^jr?$".Compile(), Unit = typeof(RepeaterDay) },
+                new { Pattern = "jr?$".Compile(), Unit = typeof(RepeaterDay) },
                 new { Pattern = "jrs?$".Compile(), Unit = typeof(RepeaterDay) },
                 new { Pattern = "^heures?$".Compile(), Unit = typeof(RepeaterHour) },
-                new { Pattern = "h?$".Compile(), Unit = typeof(RepeaterHour) },
+                new { Pattern = "h{1,1}$".Compile(), Unit = typeof(RepeaterHour) },
+//                new { Pattern = "h?ui*$".Compile(), Unit = typeof(RepeaterDay) },
                 new { Pattern = "^h?$".Compile(), Unit = typeof(RepeaterHour) },
                 new { Pattern = "min?$".Compile(), Unit = typeof(RepeaterMinute) },
                 new { Pattern = "^min?$".Compile(), Unit = typeof(RepeaterMinute) },

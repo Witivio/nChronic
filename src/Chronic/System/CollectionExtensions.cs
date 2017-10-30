@@ -13,6 +13,7 @@ namespace Chronic
             }
         }
 
+
         public static void ForEach<T>(this IList<T> collection, Action<T, T> action)
             where T : class
         {
@@ -30,6 +31,13 @@ namespace Chronic
                 var replacement = (TT)Convert.ChangeType(@this[i, 1], typeof(TT));
                 action(pattern, replacement);
             }
+        }
+
+        public static void Move<T>(this IList<T> collection, int oldIndex, int newIndex)
+        {
+            T item = collection[oldIndex];
+            collection.RemoveAt(oldIndex);
+            collection.Insert(newIndex, item);
         }
     }
 }

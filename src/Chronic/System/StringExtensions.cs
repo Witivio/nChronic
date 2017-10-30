@@ -1,4 +1,6 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Globalization;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Chronic
 {
@@ -7,6 +9,23 @@ namespace Chronic
         public static string ReplaceAll(this string @this, string pattern, string replacement)
         {
             return Regex.Replace(@this, pattern, replacement);            
+        }
+
+        public static string RemoveDiacritics(this string text)
+        {
+            var normalizedString = text.Normalize(NormalizationForm.FormD);
+            var stringBuilder = new StringBuilder();
+
+            foreach (var c in normalizedString)
+            {
+                var unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
+                if (unicodeCategory != UnicodeCategory.NonSpacingMark)
+                {
+                    stringBuilder.Append(c);
+                }
+            }
+
+            return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
         }
 
         public static Regex Compile(this string @this)

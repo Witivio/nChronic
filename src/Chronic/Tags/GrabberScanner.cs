@@ -34,7 +34,11 @@ namespace Chronic
         static readonly dynamic[] _matches = new dynamic[]
             {
                 new { Pattern = "precedent", Tag = new Grabber(Grabber.Type.Last) },
+                new { Pattern = "precedente", Tag = new Grabber(Grabber.Type.Last) },
                 new { Pattern = "suivant", Tag = new Grabber(Grabber.Type.Next) },
+                new { Pattern = "suivante", Tag = new Grabber(Grabber.Type.Next) },
+                new { Pattern = "prochain", Tag = new Grabber(Grabber.Type.Next) },
+                new { Pattern = "prochaine", Tag = new Grabber(Grabber.Type.Next) },
                 new { Pattern = "ce", Tag = new Grabber(Grabber.Type.This) },
                 new { Pattern = "cette", Tag = new Grabber(Grabber.Type.This) }
             };
