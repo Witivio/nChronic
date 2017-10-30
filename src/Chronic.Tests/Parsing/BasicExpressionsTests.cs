@@ -14,30 +14,37 @@ namespace Chronic.Tests.Parsing
         public void today_is_parsed_correctly()
         {
             Parse("today").AssertStartsAt(DateTime.Now.Date);
+            Parse("aujourd'hui", "fr").AssertStartsAt(DateTime.Now.Date);
+
         }
 
         [Fact]
         public void uppercase_today_is_parsed_correctly()
         {
             Parse("TODAY").AssertStartsAt(DateTime.Now.Date);
+            Parse("AUJOURD'HUI", "fr").AssertStartsAt(DateTime.Now.Date);
+
         }
 
         [Fact]
         public void first_letter_uppercase_today_is_parsed_correctly()
         {
             Parse("Today").AssertStartsAt(DateTime.Now.Date);
+            Parse("Aujourd'hui", "fr").AssertStartsAt(DateTime.Now.Date);
         }
 
         [Fact]
         public void yesterday_is_parsed_correctly()
         {
             Parse("yesterday").AssertStartsAt(DateTime.Now.Date.AddDays(-1));
+            Parse("hier", "fr").AssertStartsAt(DateTime.Now.Date.AddDays(-1));
         }
 
         [Fact]
         public void tomorrow_is_parsed_correctly()
         {
             Parse("tomorrow").AssertStartsAt(DateTime.Now.Date.AddDays(1));
+            Parse("demain", "fr").AssertStartsAt(DateTime.Now.Date.AddDays(1));
         }
     }
 }

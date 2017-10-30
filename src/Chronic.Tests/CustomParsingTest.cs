@@ -16,41 +16,44 @@ namespace Chronic.Tests
         {
             Parse("may 28 at 5:32:19pm", new { Context = Pointer.Type.Past })
                 .AssertEquals(Time.New(2006, 5, 28, 17, 32, 19));
+            Parse("le 28 mai à 5h32", new { Context = Pointer.Type.Past }, "fr")
+                .AssertEquals(Time.New(2006, 5, 28, 17, 32, 00));
         }
 
         [Fact]
         public void _7_days_from_now()
         {
-            Parse(" 7 days from now")
-                .AssertEquals(Time.New(2006, 8, 23, 14));
+            Parse(" 7 days from now").AssertEquals(Time.New(2006, 8, 23, 14));
+            Parse("il y a 7 jours", "fr").AssertEquals(Time.New(2006, 8, 23, 14));
         }
 
         [Fact]
         public void _7_days_from_now_at_midnight()
         {
-            Parse(" 7 days from now at midnight")
-                .AssertEquals(Time.New(2006, 8, 24));
+            Parse(" 7 days from now at midnight").AssertEquals(Time.New(2006, 8, 24));
+            Parse("il y a 7 jours à minuit", "fr").AssertEquals(Time.New(2006, 8, 24));
         }
 
         [Fact]
         public void seven_days_from_now_at_midnight()
         {
-            Parse(" seven days from now at midnight")
-                .AssertEquals(Time.New(2006, 8, 24));
+            Parse(" seven days from now at midnight").AssertEquals(Time.New(2006, 8, 24));
+            Parse(" dans 7 jours à minuit", "fr").AssertEquals(Time.New(2006, 8, 24));
         }
 
         [Fact]
         public void _2_weeks_ago()
         {
-            Parse("2 weeks ago")
-                .AssertEquals(Time.New(2006, 8, 02, 14));
+            Parse("2 weeks ago").AssertEquals(Time.New(2006, 8, 02, 14));
+            Parse("il y a 2 semaines", "fr").AssertEquals(Time.New(2006, 8, 02, 14));
+
         }
 
         [Fact]
         public void two_weeks_ago()
         {
-            Parse("two weeks ago")
-                .AssertEquals(Time.New(2006, 8, 02, 14));
+            Parse("two weeks ago").AssertEquals(Time.New(2006, 8, 02, 14));
+            Parse("il y a 2 semaines", "fr").AssertEquals(Time.New(2006, 8, 02, 14));
         }
 
         public class CanExtractTimeSpanFromSpan : ParsingTestsBase
@@ -63,10 +66,11 @@ namespace Chronic.Tests
             [Fact]
             public void may_28_at_5_32_19pm()
             {
-                Parse("7 days and two hours ago", new { Context = Pointer.Type.Past })
-                    .AssertEquals(Time.New(2006, 8, 09, 12, 34, 13));
+//                Parse("7 days and two hours ago", new { Context = Pointer.Type.Past }).AssertEquals(Time.New(2006, 8, 09, 12, 34, 13));
+                Parse("il y a 7 jours et 2 heures", new { Context = Pointer.Type.Past }, "fr").AssertEquals(Time.New(2006, 8, 09, 12, 34, 13));
+
             }
-            
+
         }
     }
 }

@@ -1,6 +1,5 @@
 using System;
 using System.Linq;
-using System.Threading;
 using Chronic;
 
 namespace Chronic.Tags.Repeaters

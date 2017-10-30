@@ -1,4 +1,5 @@
-﻿using Chronic.Handlers;
+﻿using System.Threading;
+using Chronic.Handlers;
 using Xunit;
 
 namespace Chronic.Tests.Handlers
@@ -13,6 +14,7 @@ namespace Chronic.Tests.Handlers
                 .Required<Scalar>()
                 .Required<IRepeater>()
                 .Optional<SeparatorComma>();
+            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo("en");
         }
 
         [Fact]
