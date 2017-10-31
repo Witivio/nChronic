@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace Chronic.Handlers
 {
@@ -7,12 +8,25 @@ namespace Chronic.Handlers
     {
         public override Span Handle(IList<Token> tokens, Options options)
         {
-            var newTokens = new List<Token>();
-            newTokens.Add(tokens[1]);
-            newTokens.Add(tokens[2]);
-            newTokens.Add(tokens[0]);
-            newTokens.AddRange(tokens.Skip(3));
-            return base.Handle(newTokens, options);
+            if (Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "fr")
+            {
+                var newTokens = new List<Token>();
+                newTokens.Add(tokens[2]);
+                newTokens.Add(tokens[1]);
+                newTokens.Add(tokens[0]);
+                newTokens.AddRange(tokens.Skip(3));
+                return base.Handle(newTokens, options);
+            }
+            else
+            {
+                var newTokens = new List<Token>();
+                newTokens.Add(tokens[1]);
+                newTokens.Add(tokens[2]);
+                newTokens.Add(tokens[0]);
+                newTokens.AddRange(tokens.Skip(3));
+                return base.Handle(newTokens, options);
+
+            }
         }
     }
 }

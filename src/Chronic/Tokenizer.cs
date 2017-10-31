@@ -121,6 +121,19 @@ namespace Chronic
                 {
                     tokens.Move(index, index+1);
                 }
+                if (index + 2 <= tokens.Count - 1 && token.IsTaggedAs(typeof(Pointer)) &&
+                    tokens[index + 1].IsTaggedAs(typeof(Scalar)) &&
+                    tokens[index + 2].IsTaggedAs(typeof(RepeaterUnit)))
+                {
+                    tokens.Move(index, index + 1);
+                    tokens.Move(index + 1, index + 2);
+                }
+            }
+            if (tokens[0].IsTaggedAs(typeof(Pointer)))
+            {
+                var token = tokens[0];
+                tokens.RemoveAt(0);
+                tokens.Add(token);
             }
 
             return tokens;
@@ -164,7 +177,7 @@ namespace Chronic
                 .ReplaceAll(@"['""\.,]", "")
                 .RemoveDiacritics()
                 .ReplaceAll(@"\bseconde (du|jour|mois|heure|minute|seconde)\b", "2nd $1")
-                .Numerize()
+//                .Numerize()
                 .ReplaceAll(@" \-(\d{4})\b", " tzminus$1")
                 .ReplaceAll(@"(?:^|\s)0(\d+:\d+\s*pm?\b)", "$1")
                 .ReplaceAll(@"\baujourdhui\b", "ce jour")

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using Chronic.Tags;
 using Chronic.Tags.Repeaters;
 
@@ -223,11 +224,7 @@ namespace Chronic.Handlers
                         .Using<SySmSdHandler>(),
 
 
-                    Handle
-                        .Required<ScalarMonth>()
-                        .Required<SeparatorDate>()
-                        .Required<ScalarYear>()
-                        .Using<SmSyHandler>(),
+                    
 
                     Handle
                         .Required<Scalar>()
@@ -280,6 +277,29 @@ namespace Chronic.Handlers
 
 
                 };
+            if (Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "fr")
+            {
+                dateHandlers.AddRange(new List<ComplexHandler>()
+                {
+                    Handle
+                        .Required<ScalarDay>()
+                        .Required<SeparatorDate>()
+                        .Required<ScalarYear>()
+                        .Using<SdSmHandler>(),
+                });
+                
+            }
+            else
+            {
+                dateHandlers.AddRange(new List<ComplexHandler>()
+                {
+                    Handle
+                        .Required<ScalarMonth>()
+                        .Required<SeparatorDate>()
+                        .Required<ScalarYear>()
+                        .Using<SmSyHandler>(),
+                });
+            }
 
             Add(HandlerType.Date, dateHandlers);
         }

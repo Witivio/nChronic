@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Chronic;
 
 namespace Chronic.Handlers
@@ -9,25 +10,53 @@ namespace Chronic.Handlers
     {
         public virtual Span Handle(IList<Token> tokens, Options options)
         {
-            var month = (int)tokens[0].GetTag<ScalarMonth>().Value;
-            var day = tokens[1].GetTag<ScalarDay>().Value;
-            var year = tokens[2].GetTag<ScalarYear>().Value;
-
-            var time_tokens = tokens.Skip(3).ToList();
-            if (Time.IsMonthOverflow(year, month, day))
+            if (Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName == "fr")
             {
-                return null;
+                var day = tokens[0].GetTag<ScalarDay>().Value;
+                if (tokens[1].GetTag<ScalarMonth>() == null)
+                    return null;
+                var month = (int)tokens[1].GetTag<ScalarMonth>().Value;
+                var year = tokens[2].GetTag<ScalarYear>().Value;
+
+                var time_tokens = tokens.Skip(3).ToList();
+                if (Time.IsMonthOverflow(year, month, day))
+                {
+                    return null;
+                }
+
+                try
+                {
+                    var dayStart = Time.New(year, month, day);
+                    return Utils.DayOrTime(dayStart, time_tokens, options);
+                }
+                catch (ArgumentException)
+                {
+
+                    return null;
+                }
             }
-
-            try
+            else
             {
-                var dayStart = Time.New(year, month, day);
-                return Utils.DayOrTime(dayStart, time_tokens, options);
-            }
-            catch (ArgumentException)
-            {
+                var month = (int)tokens[0].GetTag<ScalarMonth>().Value;
+                var day = tokens[1].GetTag<ScalarDay>().Value;
+                var year = tokens[2].GetTag<ScalarYear>().Value;
 
-                return null;
+                var time_tokens = tokens.Skip(3).ToList();
+                if (Time.IsMonthOverflow(year, month, day))
+                {
+                    return null;
+                }
+
+                try
+                {
+                    var dayStart = Time.New(year, month, day);
+                    return Utils.DayOrTime(dayStart, time_tokens, options);
+                }
+                catch (ArgumentException)
+                {
+
+                    return null;
+                }
             }
         }
     }
