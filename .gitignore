@@ -46,3 +46,7 @@
 # ============== Project specific ignores
 src/packages
 build
+/src/.vs/Chronic/v15/Server/sqlite3
+/src/.vs/Chronic/v15/sqlite3/storage.ide-wal
+/src/.vs/Chronic/v15/sqlite3/storage.ide-shm
+/src/.vs/Chronic/v15/sqlite3/db.lock
