@@ -207,9 +207,11 @@ namespace Chronic.Tests.Parsing
 
             Parse("3 jan 2010 4pm").AssertEquals(Time.New(2010, 1, 3, 16));
             Parse("3 jan 2010 16h", "fr").AssertEquals(Time.New(2010, 1, 3, 16));
+            Parse("3 jan 2010 16 heures", "fr").AssertEquals(Time.New(2010, 1, 3, 16));
 
             Parse("27 Oct 2006 7:30pm").AssertEquals(Time.New(2006, 10, 27, 19, 30));
             Parse("27 Oct 2006 19h30", "fr").AssertEquals(Time.New(2006, 10, 27, 19, 30));
+            Parse("27 Oct 2006 19 heures 30", "fr").AssertEquals(Time.New(2006, 10, 27, 19, 30));
         }
 
         [Fact]

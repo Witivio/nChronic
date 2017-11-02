@@ -116,7 +116,7 @@ namespace Chronic
             {
                 var token = tokens[index];
                 // on passe le "prochaine" avant le "annee / mois" dans la liste pour se rapprocher de la regle anglaise (next month)
-                if (index + 1 <= tokens.Count - 1 && token.IsTaggedAs(typeof(RepeaterUnit)) &&
+                if (index + 1 <= tokens.Count - 1 && (token.IsTaggedAs(typeof(RepeaterDay)) || token.IsTaggedAs(typeof(RepeaterMonth)) || token.IsTaggedAs(typeof(RepeaterYear)) || token.IsTaggedAs(typeof(RepeaterWeek))) &&
                     tokens[index + 1].IsTaggedAs(typeof(Grabber)))
                 {
                     tokens.Move(index, index+1);
@@ -192,6 +192,7 @@ namespace Chronic
                 .ReplaceAll(@"\b(?:dans|pendant) la (matinee)\b", "$1")
                 .ReplaceAll(@"\b(?:dans la|pendant la|pendant l|dans l) (apres midi|soiree|nuit)\b", "$1")
                 .ReplaceAll(@"\bcette nuit\b", "this night")
+                .ReplaceAll(@"\b?heures?\b", "h")
                 //.ReplaceAll(@"(\d)([ap]m|oclock)\b", "$1 $2")
                 .ReplaceAll(@"\b(dans|apres)\b", "future")
                 ;

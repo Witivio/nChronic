@@ -330,10 +330,11 @@ namespace Chronic.Tags.Repeaters
                 new {Pattern = "^(nuit|nite)s?$".Compile(), Portion = DayPortion.NIGHT},
             };
 
-        private static readonly char[] _timeSepratorFrench = new[]
+        private static readonly string[] _timeSepratorFrench = new string[]
         {
-            ':',
-            'h',
+            ":",
+            "h",
+            "heures",
         };
 
         static readonly List<dynamic> DayPatterns = new List<dynamic>

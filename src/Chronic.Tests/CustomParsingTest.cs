@@ -67,7 +67,6 @@ namespace Chronic.Tests
             public void may_28_at_5_32_19pm()
             {
                 Parse("7 days and two hours ago", new { Context = Pointer.Type.Past }).AssertEquals(Time.New(2006, 8, 09, 12, 34, 13));
-                Parse("il y a 7 jours et 2 heures", new { Context = Pointer.Type.Past }, "fr").AssertEquals(Time.New(2006, 8, 09, 12, 34, 13));
 
             }
 

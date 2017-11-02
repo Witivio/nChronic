@@ -8,10 +8,19 @@ namespace Chronic
 
         public DateTime? End;
 
+        public TimeSpan? Duration;
+
         public Span(DateTime start, DateTime end)
         {
             Start = start;
             End = end;
+        }
+
+        public Span(DateTime start, DateTime end, TimeSpan duration)
+        {
+            Start = start;
+            End = end;
+            Duration = duration;
         }
 
         public int Width

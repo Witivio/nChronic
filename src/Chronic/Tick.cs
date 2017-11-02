@@ -28,7 +28,13 @@ namespace Chronic
 
         public float ToFloat()
         {
-            return (float)Time;
+            return (float) Time;
+
+        }
+
+        public TimeSpan ToTimeSpan()
+        {
+            return TimeSpan.FromSeconds(Time);
         }
 
         public override string ToString()
