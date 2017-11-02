@@ -42,8 +42,8 @@ namespace Chronic.Tests.Parsing
             Parse("trouves moi un creneau de 3h30 la semaine prochaine", "fr").AssertStartsAtWithDuration(Time.New(2017, 11, 5), new TimeSpan(0, 3, 30, 0));
             Parse("trouves moi un creneau de 3h la semaine prochaine", "fr").AssertStartsAtWithDuration(Time.New(2017, 11, 5), new TimeSpan(0, 3, 0, 0));
             Parse("trouves moi un creneau de 1h30 dans 1 semaine", "fr").AssertStartsAtWithDuration(Time.New(2017, 11, 7, TimeOfDay), new TimeSpan(0, 1, 30, 0));
-            Parse("trouves moi un creneau avec Nico et Alice de 1h30 dans 1 semaine", "fr").AssertStartsAt(Time.New(2017, 11, 7, TimeOfDay));
-            Parse("trouves moi un creneau avec titi@toro.Fr et toto@toro.fr de 1h30 dans 1 semaine", "fr").AssertStartsAt(Time.New(2017, 11, 7, TimeOfDay));
+            Parse("trouves moi un creneau avec Nico et Alice de 1h30 dans 1 semaine", "fr").AssertStartsAtWithDuration(Time.New(2017, 11, 7, TimeOfDay), new TimeSpan(0, 1, 30, 0));
+            Parse("trouves moi un creneau avec titi@toro.Fr et toto@toro.fr de 1h30 dans 1 semaine", "fr").AssertStartsAtWithDuration(Time.New(2017, 11, 7, TimeOfDay), new TimeSpan(0, 1, 30, 0));
         }
     }
 }
